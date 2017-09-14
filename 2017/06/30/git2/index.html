@@ -95,21 +95,18 @@
 
 
 
-<meta name="description" content="git-01命令行概述 dos(windows) shell(Linux,Unix,Mac) csh ksh bash    常用命令 pwd(Print Working Directory)查看当前目录 cd(Change Directory)切换目录,如cd .. 返回上一级目录 ls(List)查看当前目录下的内容,如ls-al mkdir(make directory)创建目录,如mkdi">
+<meta name="description" content="git-02分支操作 创建分支 git branch 分支名称   切换分支 git checkout 分支名称   创建并切换分支名称 git checkout -b 分支名称   删除本地分支 git branch -d 分支名称(如果没有被合并,无法被删除) git branch -D 分支名称(强制删除)   查看本地分支 git branch   查看远程分支 git branch -r">
 <meta name="keywords" content="repositoriey">
 <meta property="og:type" content="article">
-<meta property="og:title" content="命令行以及git初识1">
-<meta property="og:url" content="http://yoursite.com/2017/06/26/git/index.html">
+<meta property="og:title" content="命令行以及git初识2">
+<meta property="og:url" content="http://yoursite.com/2017/06/30/git2/index.html">
 <meta property="og:site_name" content="LiveRay&#39;s Blog">
-<meta property="og:description" content="git-01命令行概述 dos(windows) shell(Linux,Unix,Mac) csh ksh bash    常用命令 pwd(Print Working Directory)查看当前目录 cd(Change Directory)切换目录,如cd .. 返回上一级目录 ls(List)查看当前目录下的内容,如ls-al mkdir(make directory)创建目录,如mkdi">
+<meta property="og:description" content="git-02分支操作 创建分支 git branch 分支名称   切换分支 git checkout 分支名称   创建并切换分支名称 git checkout -b 分支名称   删除本地分支 git branch -d 分支名称(如果没有被合并,无法被删除) git branch -D 分支名称(强制删除)   查看本地分支 git branch   查看远程分支 git branch -r">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/06/26/git/img/git1.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/06/26/git/img/area.jpg">
-<meta property="og:updated_time" content="2017-09-14T09:59:53.717Z">
+<meta property="og:updated_time" content="2017-09-14T09:59:52.449Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="命令行以及git初识1">
-<meta name="twitter:description" content="git-01命令行概述 dos(windows) shell(Linux,Unix,Mac) csh ksh bash    常用命令 pwd(Print Working Directory)查看当前目录 cd(Change Directory)切换目录,如cd .. 返回上一级目录 ls(List)查看当前目录下的内容,如ls-al mkdir(make directory)创建目录,如mkdi">
-<meta name="twitter:image" content="http://yoursite.com/2017/06/26/git/img/git1.jpg">
+<meta name="twitter:title" content="命令行以及git初识2">
+<meta name="twitter:description" content="git-02分支操作 创建分支 git branch 分支名称   切换分支 git checkout 分支名称   创建并切换分支名称 git checkout -b 分支名称   删除本地分支 git branch -d 分支名称(如果没有被合并,无法被删除) git branch -D 分支名称(强制删除)   查看本地分支 git branch   查看远程分支 git branch -r">
 
 
 
@@ -139,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/26/git/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/30/git2/"/>
 
 
 
 
 
-  <title>命令行以及git初识1 | LiveRay's Blog</title>
+  <title>命令行以及git初识2 | LiveRay's Blog</title>
   
 
 
@@ -292,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/git/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/git2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiveRay">
@@ -309,7 +306,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">命令行以及git初识1</h1>
+          <h1 class="post-title" itemprop="name headline">命令行以及git初识2</h1>
         
 
         <div class="post-meta">
@@ -321,8 +318,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T16:30:24+08:00">
-                2017-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T20:16:28+08:00">
+                2017-06-30
               </time>
             
 
@@ -381,127 +378,159 @@
       
 
       
-        <h1 id="git-01"><a href="#git-01" class="headerlink" title="git-01"></a>git-01</h1><h2 id="命令行概述"><a href="#命令行概述" class="headerlink" title="命令行概述"></a>命令行概述</h2><ul>
-<li>dos(windows)</li>
-<li>shell(Linux,Unix,Mac)<ul>
-<li>csh</li>
-<li>ksh</li>
-<li>bash</li>
+        <h1 id="git-02"><a href="#git-02" class="headerlink" title="git-02"></a>git-02</h1><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><ul>
+<li>创建分支<ul>
+<li>git branch 分支名称</li>
+</ul>
+</li>
+<li>切换分支<ul>
+<li>git checkout 分支名称</li>
+</ul>
+</li>
+<li>创建并切换分支名称<ul>
+<li>git checkout -b 分支名称</li>
+</ul>
+</li>
+<li>删除本地分支<ul>
+<li>git branch -d 分支名称(如果没有被合并,无法被删除)</li>
+<li>git branch -D 分支名称(强制删除)</li>
+</ul>
+</li>
+<li>查看本地分支<ul>
+<li>git branch</li>
+</ul>
+</li>
+<li>查看远程分支<ul>
+<li>git branch -r</li>
+</ul>
+</li>
+<li>查看所有分支<ul>
+<li>git branch a</li>
+</ul>
+</li>
+<li>删除远程分支<ul>
+<li>git push 远程仓库地址 : 远程分支名称</li>
+<li>git push 远程仓库地址 – delete 远程分支名称</li>
+</ul>
+</li>
+<li>保存当前状态<ul>
+<li>git stash</li>
+</ul>
+</li>
+<li>回复当前状态<ul>
+<li>git stash pop</li>
 </ul>
 </li>
 </ul>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
-<li>pwd(Print Working Directory)查看当前目录</li>
-<li>cd(Change Directory)切换目录,如cd .. 返回上一级目录</li>
-<li>ls(List)查看当前目录下的内容,如ls-al</li>
-<li>mkdir(make directory)创建目录,如mkdir blog</li>
-<li>touch 创建文件,如touch index.html</li>
-<li>cat 查看全部文件内容,如 cat index.html</li>
-<li>less 查看文件,如more etc/password  less etc/password</li>
-<li>rm(remove)删除文件,如rm index.html</li>
-<li>rmdir(remove directory) 删除文件夹，只能删除空文件夹，不常用</li>
-<li>mv (move) 移动文件或重命名，如 mv index.html ./demo/index.html</li>
-<li>cp (copy) 复制文件，cp index.html ./demo/index.html</li>
-<li>tab 自动补全，连按两次会将所有匹配内容显示出来</li>
-<li>> 和 &gt;&gt;重定向，如echo hello world! &gt; README.md，&gt;覆盖 &gt;&gt;追加</li>
-<li>管道符可以将多个命令连接使用，上一次（命令）的执行结果当成下一次（命令）的参数。</li>
-<li>grep 匹配内容，一般结合管道符使用</li>
+<h2 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h2><ul>
+<li>telnet 一种不加密的通信协议</li>
+<li>ssh 一种协议, 用来实现两台计算机之间的通信(具体就是实现远程登录)<ul>
+<li>使用密码登录<ul>
+<li>首先客户端向服务器发送一个请求</li>
+<li>服务器接受到请求之后向客户端发送自己的公钥</li>
+<li>客户端接受到公钥之后存储到指定目录(C:\ Users\ admin.ssh)</li>
+<li>客户端输入密码然后用公钥加密,再次发送请求</li>
+<li>服务器接收到密文之后,使用自己的私钥解密然后验证通过,从而允许服务端登录</li>
 </ul>
-<h2 id="vi编辑器"><a href="#vi编辑器" class="headerlink" title="vi编辑器"></a>vi编辑器</h2><blockquote>
-<p>linux操作系统标配，相当于windows下的记事本。</p>
+</li>
+<li>使用公钥和私钥登录<ul>
+<li>客户端先生成自己的公钥和私钥(ssh-keygen -t rsa)</li>
+<li>把客户端的公钥传递给服务器,服务器使用该公钥给客户端授权</li>
+<li>客户端可以直接免密登录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="远程-共享-仓库"><a href="#远程-共享-仓库" class="headerlink" title="远程(共享)仓库"></a>远程(共享)仓库</h2><blockquote>
+<p>借助一个远程仓库,大家可以用来共享代码、历史版本等数据,实现团队成员之间代码的同步.</p>
 </blockquote>
-<h2 id="vi编辑器的三种模式"><a href="#vi编辑器的三种模式" class="headerlink" title="vi编辑器的三种模式"></a>vi编辑器的三种模式</h2><blockquote>
-<p>vi编辑器提供了三种模式 命令模式、插入模式、底行模式、每种模式下所能进行的操作是不一样的</p>
+<h2 id="远程仓库操作流程"><a href="#远程仓库操作流程" class="headerlink" title="远程仓库操作流程"></a>远程仓库操作流程</h2><h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><ol>
+<li>创建一个以.git结尾的目录mkdir repo.git</li>
+<li>进入该目录 cd repo.git</li>
+<li>初始化共享仓库 git init –bare</li>
+</ol>
+<blockquote>
+<p>这样我们就创建好了一个共享的仓库,但是现在的这个仓库仅仅只是一个空的仓库,并且不允许在这个仓库中进行任何的修改</p>
+</blockquote>
+<h3 id="向共享仓库中推送内容"><a href="#向共享仓库中推送内容" class="headerlink" title="向共享仓库中推送内容"></a>向共享仓库中推送内容</h3><blockquote>
+<p>将自己开发的项目同步到这个目录当中,其他的开发者可以共享你开发的项目了.</p>
+</blockquote>
+<ol>
+<li>进去自己的项目根目录 cd demo</li>
+<li><ul>
+<li>git push 远程仓库的地址 本地分支名称:远程分支名称</li>
+<li>git push 远程仓库的地址 本地分支名称(如果本地和远程的名称一致)</li>
+<li>git push ../repo.git master</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>这样demo项目就被推送到共享仓库当中了</p>
+</blockquote>
+<h3 id="从共享仓库中取出内容"><a href="#从共享仓库中取出内容" class="headerlink" title="从共享仓库中取出内容"></a>从共享仓库中取出内容</h3><ol>
+<li>新建一个目录example(模拟另一个开发者)</li>
+<li>进入该目录cd ./example</li>
+<li><ul>
+<li>第一次下载代码一般使用如下的命令</li>
+<li>git clone 远程仓库的地址 [项目名称]</li>
+<li>git clone repo.git</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>通过repo.git共享仓库,我们得到了一个demo的副本 如果以后还需要下载项目代码可以通过一下代码实现</p>
 </blockquote>
 <ul>
-<li>3种模式的切换如下图所示</li>
+<li>git pull 远程仓库的地址 远程分支名称:本地分支名称</li>
+<li>git pull 远程仓库的地址 远程分支名称(如果本地和远程的名称一致)</li>
 </ul>
-<p><img src="img/git1.jpg" alt=""></p>
-<h3 id="vi常用操作"><a href="#vi常用操作" class="headerlink" title="vi常用操作"></a>vi常用操作</h3><ol>
-<li>打开/创建,  vi 文件路径</li>
-<li>底行模式 :w 保存、:w filenme另存为</li>
-<li>底行模式 :q 退出</li>
-<li>底行模式 :wq 保存并退出 (write quit)</li>
-<li>底行模式 :e! 撤销更改, 返回到上一次保存的状态</li>
-<li>底行模式 :q! 不保存,强制退出</li>
-<li>底行模式 :set nu 设置行号</li>
-<li>命令模式 ZZ(大写) 保存并退出</li>
-<li>命令模式 u 撤销操作 可多次使用</li>
-<li>命令模式 dd 删除当前行</li>
-<li>命令模式 yy 复制当前行</li>
-<li>命令模式 p 粘贴内容</li>
-<li>命令模式 ctrl+f 向前翻页</li>
-<li>命令模式 ctrl+b 向后翻页</li>
-<li>命令模式 i 进入编辑模式, 当前光标处插入</li>
-<li>命令模式 a 进入编辑模式, 当前光标后插入</li>
-<li>命令模式 A 进入编辑模式, 光标移动到行尾</li>
-<li>命令模式 o 进入编辑模式, 当前行下面插入新行</li>
-<li>命令模式 O 进入编辑模式, 当前行上面插入新行</li>
+<blockquote>
+<ul>
+<li>添加远程仓库别名<ul>
+<li>git remote add 别名 远程仓库地址</li>
+</ul>
+</li>
+<li>删除远程仓库别名<ul>
+<li>git remote remove 别名</li>
+</ul>
+</li>
+<li>查看远程仓库别名的详细信息<ul>
+<li>git remote show 别名</li>
+</ul>
+</li>
+<li>查看所有别名<ul>
+<li>git remote</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="基于克隆下来的项目进行修改"><a href="#基于克隆下来的项目进行修改" class="headerlink" title="基于克隆下来的项目进行修改"></a>基于克隆下来的项目进行修改</h3><ul>
+<li>修改内容</li>
+<li>提交内容</li>
+<li>推送内容</li>
+</ul>
+<blockquote>
+<p>这样就可以实现代码的共享,但是,现在的这个共享仓库只是存放在本地的,其他人是没有办法从我们的共享仓库共享内容的!!! 那么,如果想要实现共享,则可以将自己的共享仓库放入到一个远程的服务器中,问题就可以解决了…</p>
+</blockquote>
+<h2 id="远程仓库服务GitHub"><a href="#远程仓库服务GitHub" class="headerlink" title="远程仓库服务GitHub"></a>远程仓库服务GitHub</h2><blockquote>
+<p>如果我们熟悉服务器的话，我们完全可以将上述的步骤在我们的远程服务器上进行操作，然后再做一些登录权限的设置，就可非常完美的搭建一个共享服务器了。其实为了更好的管理我们的仓库，一些第三方机构开发出了Web版仓库管理程序，通过Web界面形式管理仓库。</p>
+</blockquote>
+<h3 id="GitHub基本使用"><a href="#GitHub基本使用" class="headerlink" title="GitHub基本使用"></a>GitHub基本使用</h3><ol>
+<li>注册账号</li>
+<li>创建共享仓库</li>
 </ol>
-<h2 id="版本控制概述"><a href="#版本控制概述" class="headerlink" title="版本控制概述"></a>版本控制概述</h2><ul>
-<li>本地版本控制</li>
-<li>集中版本控制</li>
-<li>分布式版本控制</li>
-</ul>
-<h3 id="版本控制对于开发来说的主要的功能"><a href="#版本控制对于开发来说的主要的功能" class="headerlink" title="版本控制对于开发来说的主要的功能:"></a>版本控制对于开发来说的主要的功能:</h3><ol>
-<li>团队成员之间进行代码的合并</li>
-<li>维护所有代码的历史记录</li>
-</ol>
-<h2 id="git环境安装"><a href="#git环境安装" class="headerlink" title="git环境安装"></a>git环境安装</h2><ul>
-<li>windows 安装<ul>
-<li><a href="http://git-scm.com/download/win" target="_blank" rel="external">下载地址</a>,下载之后和普通软件的安装方法一样</li>
+<h3 id="GitHub地址格式"><a href="#GitHub地址格式" class="headerlink" title="GitHub地址格式"></a>GitHub地址格式</h3><ul>
+<li>https://<ul>
+<li>获取代码不需要密码</li>
+<li>提交代码需要密码</li>
 </ul>
 </li>
-<li>linux 安装<ul>
-<li>CentOS发行版：sudo yum install git</li>
-<li>Ubuntu发行版：sudo apt-get install git</li>
+<li>git@<ul>
+<li>需要将自己的公钥添加到GitHub上</li>
+<li>获取与提交代码都不需要密码</li>
 </ul>
 </li>
-<li>Mac 安装<ul>
-<li>打开Terminal直接输入git命令，会自动提示，按提示引导安装即可</li>
-</ul>
-</li>
-</ul>
-<h2 id="git工作原理"><a href="#git工作原理" class="headerlink" title="git工作原理"></a>git工作原理</h2><h3 id="git的三个工作区域"><a href="#git的三个工作区域" class="headerlink" title="git的三个工作区域"></a>git的三个工作区域</h3><ul>
-<li>工作目录(当前代码所有在的代码)</li>
-<li>暂存区域(工作目录的文件一旦加到暂存区就会被git管理)<ul>
-<li>本地仓库(完成功能的代码会提交到这里)</li>
-</ul>
-</li>
-</ul>
-<p><img src="img/area.jpg" alt=""></p>
-<h3 id="git版本控制工具流程"><a href="#git版本控制工具流程" class="headerlink" title="git版本控制工具流程"></a>git版本控制工具流程</h3><ol>
-<li>设置用户信息<ul>
-<li>get config –global user.name zhangsan</li>
-<li>get config –global user.email zhangsan@qq.com</li>
-</ul>
-</li>
-<li>初始化本地仓库<ul>
-<li>git init</li>
-</ul>
-</li>
-<li>查看仓库中所有的文件状态<ul>
-<li>git status</li>
-</ul>
-</li>
-<li>把工作目录中的文件添加到暂存区<ul>
-<li>git add 文件列表</li>
-<li>git add *</li>
-</ul>
-</li>
-<li>把暂存区中的代码添加到本地仓库<ul>
-<li>git commit -m 备注信息</li>
-</ul>
-</li>
-<li>查看提交历史</li>
-<li>撤销文件修改</li>
-<li>恢复版本</li>
-</ol>
-<h3 id="git管理文件的四种状态"><a href="#git管理文件的四种状态" class="headerlink" title="git管理文件的四种状态"></a>git管理文件的四种状态</h3><ul>
-<li>未追踪untraced(没有被git管理的文件,新创建的文件) 位于工作目录</li>
-<li>已暂存staged(一般用于存储半成品)位于暂存区</li>
-<li>已提交commited(一般存储成品,一次阶段性成果会commit一次)位于本地仓库</li>
-<li>已修改modified(位于暂存区中的代码又被修改了)位于工作目录</li>
 </ul>
 
       
@@ -557,14 +586,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/26/git/" rel="next" title="命令行以及git初识1">
+                <i class="fa fa-chevron-left"></i> 命令行以及git初识1
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/30/git2/" rel="prev" title="命令行以及git初识2">
-                命令行以及git初识2 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/13/yiha/" rel="prev" title="yiha">
+                yiha <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -716,7 +749,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-01"><span class="nav-number">1.</span> <span class="nav-text">git-01</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行概述"><span class="nav-number">1.1.</span> <span class="nav-text">命令行概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">1.2.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vi编辑器"><span class="nav-number">1.3.</span> <span class="nav-text">vi编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vi编辑器的三种模式"><span class="nav-number">1.4.</span> <span class="nav-text">vi编辑器的三种模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vi常用操作"><span class="nav-number">1.4.1.</span> <span class="nav-text">vi常用操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本控制概述"><span class="nav-number">1.5.</span> <span class="nav-text">版本控制概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本控制对于开发来说的主要的功能"><span class="nav-number">1.5.1.</span> <span class="nav-text">版本控制对于开发来说的主要的功能:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git环境安装"><span class="nav-number">1.6.</span> <span class="nav-text">git环境安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git工作原理"><span class="nav-number">1.7.</span> <span class="nav-text">git工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git的三个工作区域"><span class="nav-number">1.7.1.</span> <span class="nav-text">git的三个工作区域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git版本控制工具流程"><span class="nav-number">1.7.2.</span> <span class="nav-text">git版本控制工具流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git管理文件的四种状态"><span class="nav-number">1.7.3.</span> <span class="nav-text">git管理文件的四种状态</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-02"><span class="nav-number">1.</span> <span class="nav-text">git-02</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分支操作"><span class="nav-number">1.1.</span> <span class="nav-text">分支操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程登录"><span class="nav-number">1.2.</span> <span class="nav-text">远程登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程-共享-仓库"><span class="nav-number">1.3.</span> <span class="nav-text">远程(共享)仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库操作流程"><span class="nav-number">1.4.</span> <span class="nav-text">远程仓库操作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建远程仓库"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建远程仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向共享仓库中推送内容"><span class="nav-number">1.4.2.</span> <span class="nav-text">向共享仓库中推送内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从共享仓库中取出内容"><span class="nav-number">1.4.3.</span> <span class="nav-text">从共享仓库中取出内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于克隆下来的项目进行修改"><span class="nav-number">1.4.4.</span> <span class="nav-text">基于克隆下来的项目进行修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库服务GitHub"><span class="nav-number">1.5.</span> <span class="nav-text">远程仓库服务GitHub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub基本使用"><span class="nav-number">1.5.1.</span> <span class="nav-text">GitHub基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub地址格式"><span class="nav-number">1.5.2.</span> <span class="nav-text">GitHub地址格式</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

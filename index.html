@@ -176,7 +176,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">心纯净,行至远</p>
+        <p class="site-subtitle">心纯净-行至远</p>
       
   </div>
 
@@ -342,8 +342,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/����/" itemprop="url" rel="index">
-                    <span itemprop="name">����</span>
+                  <a href="/categories/日常/" itemprop="url" rel="index">
+                    <span itemprop="name">日常</span>
                   </a>
                 </span>
 
@@ -480,28 +480,6 @@
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/����/" itemprop="url" rel="index">
-                    <span itemprop="name">����</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -581,7 +559,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/git/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/30/git2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="LiveRay">
@@ -600,7 +578,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/26/git/" itemprop="url">命令行以及git初识</a></h1>
+                <a class="post-title-link" href="/2017/06/30/git2/" itemprop="url">命令行以及git初识2</a></h1>
         
 
         <div class="post-meta">
@@ -612,8 +590,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T16:30:24+08:00">
-                2017-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T20:16:28+08:00">
+                2017-06-30
               </time>
             
 
@@ -635,8 +613,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -674,7 +652,302 @@
       
         
           
-            <h1 id="gitday-01"><a href="#gitday-01" class="headerlink" title="gitday-01"></a>gitday-01</h1><h2 id="命令行概述"><a href="#命令行概述" class="headerlink" title="命令行概述"></a>命令行概述</h2><ul>
+            <h1 id="git-02"><a href="#git-02" class="headerlink" title="git-02"></a>git-02</h1><h2 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h2><ul>
+<li>创建分支<ul>
+<li>git branch 分支名称</li>
+</ul>
+</li>
+<li>切换分支<ul>
+<li>git checkout 分支名称</li>
+</ul>
+</li>
+<li>创建并切换分支名称<ul>
+<li>git checkout -b 分支名称</li>
+</ul>
+</li>
+<li>删除本地分支<ul>
+<li>git branch -d 分支名称(如果没有被合并,无法被删除)</li>
+<li>git branch -D 分支名称(强制删除)</li>
+</ul>
+</li>
+<li>查看本地分支<ul>
+<li>git branch</li>
+</ul>
+</li>
+<li>查看远程分支<ul>
+<li>git branch -r</li>
+</ul>
+</li>
+<li>查看所有分支<ul>
+<li>git branch a</li>
+</ul>
+</li>
+<li>删除远程分支<ul>
+<li>git push 远程仓库地址 : 远程分支名称</li>
+<li>git push 远程仓库地址 – delete 远程分支名称</li>
+</ul>
+</li>
+<li>保存当前状态<ul>
+<li>git stash</li>
+</ul>
+</li>
+<li>回复当前状态<ul>
+<li>git stash pop</li>
+</ul>
+</li>
+</ul>
+<h2 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h2><ul>
+<li>telnet 一种不加密的通信协议</li>
+<li>ssh 一种协议, 用来实现两台计算机之间的通信(具体就是实现远程登录)<ul>
+<li>使用密码登录<ul>
+<li>首先客户端向服务器发送一个请求</li>
+<li>服务器接受到请求之后向客户端发送自己的公钥</li>
+<li>客户端接受到公钥之后存储到指定目录(C:\ Users\ admin.ssh)</li>
+<li>客户端输入密码然后用公钥加密,再次发送请求</li>
+<li>服务器接收到密文之后,使用自己的私钥解密然后验证通过,从而允许服务端登录</li>
+</ul>
+</li>
+<li>使用公钥和私钥登录<ul>
+<li>客户端先生成自己的公钥和私钥(ssh-keygen -t rsa)</li>
+<li>把客户端的公钥传递给服务器,服务器使用该公钥给客户端授权</li>
+<li>客户端可以直接免密登录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="远程-共享-仓库"><a href="#远程-共享-仓库" class="headerlink" title="远程(共享)仓库"></a>远程(共享)仓库</h2><blockquote>
+<p>借助一个远程仓库,大家可以用来共享代码、历史版本等数据,实现团队成员之间代码的同步.</p>
+</blockquote>
+<h2 id="远程仓库操作流程"><a href="#远程仓库操作流程" class="headerlink" title="远程仓库操作流程"></a>远程仓库操作流程</h2><h3 id="创建远程仓库"><a href="#创建远程仓库" class="headerlink" title="创建远程仓库"></a>创建远程仓库</h3><ol>
+<li>创建一个以.git结尾的目录mkdir repo.git</li>
+<li>进入该目录 cd repo.git</li>
+<li>初始化共享仓库 git init –bare</li>
+</ol>
+<blockquote>
+<p>这样我们就创建好了一个共享的仓库,但是现在的这个仓库仅仅只是一个空的仓库,并且不允许在这个仓库中进行任何的修改</p>
+</blockquote>
+<h3 id="向共享仓库中推送内容"><a href="#向共享仓库中推送内容" class="headerlink" title="向共享仓库中推送内容"></a>向共享仓库中推送内容</h3><blockquote>
+<p>将自己开发的项目同步到这个目录当中,其他的开发者可以共享你开发的项目了.</p>
+</blockquote>
+<ol>
+<li>进去自己的项目根目录 cd demo</li>
+<li><ul>
+<li>git push 远程仓库的地址 本地分支名称:远程分支名称</li>
+<li>git push 远程仓库的地址 本地分支名称(如果本地和远程的名称一致)</li>
+<li>git push ../repo.git master</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>这样demo项目就被推送到共享仓库当中了</p>
+</blockquote>
+<h3 id="从共享仓库中取出内容"><a href="#从共享仓库中取出内容" class="headerlink" title="从共享仓库中取出内容"></a>从共享仓库中取出内容</h3><ol>
+<li>新建一个目录example(模拟另一个开发者)</li>
+<li>进入该目录cd ./example</li>
+<li><ul>
+<li>第一次下载代码一般使用如下的命令</li>
+<li>git clone 远程仓库的地址 [项目名称]</li>
+<li>git clone repo.git</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>通过repo.git共享仓库,我们得到了一个demo的副本 如果以后还需要下载项目代码可以通过一下代码实现</p>
+</blockquote>
+<ul>
+<li>git pull 远程仓库的地址 远程分支名称:本地分支名称</li>
+<li>git pull 远程仓库的地址 远程分支名称(如果本地和远程的名称一致)</li>
+</ul>
+<blockquote>
+<ul>
+<li>添加远程仓库别名<ul>
+<li>git remote add 别名 远程仓库地址</li>
+</ul>
+</li>
+<li>删除远程仓库别名<ul>
+<li>git remote remove 别名</li>
+</ul>
+</li>
+<li>查看远程仓库别名的详细信息<ul>
+<li>git remote show 别名</li>
+</ul>
+</li>
+<li>查看所有别名<ul>
+<li>git remote</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="基于克隆下来的项目进行修改"><a href="#基于克隆下来的项目进行修改" class="headerlink" title="基于克隆下来的项目进行修改"></a>基于克隆下来的项目进行修改</h3><ul>
+<li>修改内容</li>
+<li>提交内容</li>
+<li>推送内容</li>
+</ul>
+<blockquote>
+<p>这样就可以实现代码的共享,但是,现在的这个共享仓库只是存放在本地的,其他人是没有办法从我们的共享仓库共享内容的!!! 那么,如果想要实现共享,则可以将自己的共享仓库放入到一个远程的服务器中,问题就可以解决了…</p>
+</blockquote>
+<h2 id="远程仓库服务GitHub"><a href="#远程仓库服务GitHub" class="headerlink" title="远程仓库服务GitHub"></a>远程仓库服务GitHub</h2><blockquote>
+<p>如果我们熟悉服务器的话，我们完全可以将上述的步骤在我们的远程服务器上进行操作，然后再做一些登录权限的设置，就可非常完美的搭建一个共享服务器了。其实为了更好的管理我们的仓库，一些第三方机构开发出了Web版仓库管理程序，通过Web界面形式管理仓库。</p>
+</blockquote>
+<h3 id="GitHub基本使用"><a href="#GitHub基本使用" class="headerlink" title="GitHub基本使用"></a>GitHub基本使用</h3><ol>
+<li>注册账号</li>
+<li>创建共享仓库</li>
+</ol>
+<h3 id="GitHub地址格式"><a href="#GitHub地址格式" class="headerlink" title="GitHub地址格式"></a>GitHub地址格式</h3><ul>
+<li>https://<ul>
+<li>获取代码不需要密码</li>
+<li>提交代码需要密码</li>
+</ul>
+</li>
+<li>git@<ul>
+<li>需要将自己的公钥添加到GitHub上</li>
+<li>获取与提交代码都不需要密码</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/26/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiveRay">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiveRay's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/26/git/" itemprop="url">命令行以及git初识1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-26T16:30:24+08:00">
+                2017-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="git-01"><a href="#git-01" class="headerlink" title="git-01"></a>git-01</h1><h2 id="命令行概述"><a href="#命令行概述" class="headerlink" title="命令行概述"></a>命令行概述</h2><ul>
 <li>dos(windows)</li>
 <li>shell(Linux,Unix,Mac)<ul>
 <li>csh</li>
@@ -880,7 +1153,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
