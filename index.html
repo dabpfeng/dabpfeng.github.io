@@ -652,37 +652,36 @@
       
         
           
-            <h2 id="模块化开发的概念"><a href="#模块化开发的概念" class="headerlink" title="模块化开发的概念"></a>模块化开发的概念</h2><ul>
-<li>非模块化开发的缺点<ul>
+            <h2 id="模块化开发的概念"><a href="#模块化开发的概念" class="headerlink" title="模块化开发的概念"></a>模块化开发的概念</h2><p>非模块化开发的缺点</p>
+<ul>
 <li>命名冲突的问题,很大的概率上会造成变量、函数名的冲突污染</li>
 <li>文件依赖: &nbsp;&nbsp;在多个js文件引用的问题上,b.js可能需要依赖a.js的文件中的变量以及函数等,所以在加载上会有一个先后顺序的问题,在实际的开发中,文件比较且比较繁杂,很容易出问题.</li>
 </ul>
-</li>
-</ul>
 <p>根据以上的两个存在的问题,一句模块发开发的概念可以较完美的解决上述的两个问题.</p>
 <ul>
-<li><p>模版规范</p>
-<ul>
+<li>模版规范<ul>
 <li>浏览器端模块化<ul>
 <li>AMD — Require.js</li>
 <li>CMD — Sea.js</li>
 </ul>
 </li>
 <li>服务端的模块化<ul>
-<li>CommonJS — Node.js<h3 id="Require-js的基本使用"><a href="#Require-js的基本使用" class="headerlink" title="Require.js的基本使用"></a>Require.js的基本使用</h3><h4 id="为什么要用Require-js"><a href="#为什么要用Require-js" class="headerlink" title="为什么要用Require.js?"></a>为什么要用Require.js?</h4>最早的时候，所有Javascript代码都写在一个文件里面，只要加载这一个文件就够了。后来，代码越来越多，一个文件不够了，必须分成多个文件，依次加载。首先在加载的时候,浏览器会停止对网页的渲染,加载文件越多,网页失去响应的时间越长,极大的影响的用户的体验;其次,由于js文件之间存在着依赖的关系,因此必须要保证正确的加载顺序,依赖性最大的文件一定要放到最后面进行加载,当依赖的关系很复杂的时候,代码的编写和维护都会变成非常的困难.</li>
+<li>CommonJS — Node.js</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<h3 id="Require-js的基本使用"><a href="#Require-js的基本使用" class="headerlink" title="Require.js的基本使用"></a>Require.js的基本使用</h3><h4 id="为什么要用Require-js"><a href="#为什么要用Require-js" class="headerlink" title="为什么要用Require.js?"></a>为什么要用Require.js?</h4><p>  最早的时候，所有Javascript代码都写在一个文件里面，只要加载这一个文件就够了。后来，代码越来越多，一个文件不够了，必须分成多个文件，依次加载。首先在加载的时候,浏览器会停止对网页的渲染,加载文件越多,网页失去响应的时间越长,极大的影响的用户的体验;其次,由于js文件之间存在着依赖的关系,因此必须要保证正确的加载顺序,依赖性最大的文件一定要放到最后面进行加载,当依赖的关系很复杂的时候,代码的编写和维护都会变成非常的困难.</p>
 <ul>
 <li>所以Require.js就是为了解决这两个问题.</li>
 </ul>
 <ol>
 <li>实现js文件的异步加载,避免网页失去响应;</li>
-<li>管理模块之间的依赖性,便于代码的编写和维护.</li>
-</ol>
+<li><p>管理模块之间的依赖性,便于代码的编写和维护.</p>
 <p>RequireJS是一个非常小巧的JavaScript模块载入框架,是AMD规范最好的实现者之一.</p>
 </li>
-</ul>
+</ol>
 <h4 id="Require-js的加载"><a href="#Require-js的加载" class="headerlink" title="Require.js的加载"></a>Require.js的加载</h4><ol>
 <li>使用require.js的第一步,是先去官网下载最新的版本</li>
 <li>下载后,假设把它放在js子目录下面,就可以加载了.</li>
