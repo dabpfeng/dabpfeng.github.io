@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="模块化开发的概念 非模块化开发的缺点 命名冲突的问题,很大的概率上会造成变量、函数名的冲突污染 文件依赖: &amp;nbsp;&amp;nbsp;在多个js文件引用的问题上,b.js可能需要依赖a.js的文件中的变量以及函数等,所以在加载上会有一个先后顺序的问题,在实际的开发中,文件比较且比较繁杂,很容易出问题.    根据以上的两个存在的问题,一句模块发开发的概念可以较完美的解决上述的两个问题.  模版规范">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块化开发以及require.js的使用">
+<meta property="og:url" content="http://yoursite.com/2017/07/20/module/index.html">
+<meta property="og:site_name" content="LiveRay&#39;s Blog">
+<meta property="og:description" content="模块化开发的概念 非模块化开发的缺点 命名冲突的问题,很大的概率上会造成变量、函数名的冲突污染 文件依赖: &amp;nbsp;&amp;nbsp;在多个js文件引用的问题上,b.js可能需要依赖a.js的文件中的变量以及函数等,所以在加载上会有一个先后顺序的问题,在实际的开发中,文件比较且比较繁杂,很容易出问题.    根据以上的两个存在的问题,一句模块发开发的概念可以较完美的解决上述的两个问题.  模版规范">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-20T06:19:18.141Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模块化开发以及require.js的使用">
+<meta name="twitter:description" content="模块化开发的概念 非模块化开发的缺点 命名冲突的问题,很大的概率上会造成变量、函数名的冲突污染 文件依赖: &amp;nbsp;&amp;nbsp;在多个js文件引用的问题上,b.js可能需要依赖a.js的文件中的变量以及函数等,所以在加载上会有一个先后顺序的问题,在实际的开发中,文件比较且比较繁杂,很容易出问题.    根据以上的两个存在的问题,一句模块发开发的概念可以较完美的解决上述的两个问题.  模版规范">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/20/module/"/>
+
+
+
+
+
+  <title>模块化开发以及require.js的使用 | LiveRay's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LiveRay's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">心纯净-行至远</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LiveRay">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/tx.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LiveRay's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">模块化开发以及require.js的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-20T19:06:42+08:00">
+                2017-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="模块化开发的概念"><a href="#模块化开发的概念" class="headerlink" title="模块化开发的概念"></a>模块化开发的概念</h2><ul>
+<li>非模块化开发的缺点<ul>
+<li>命名冲突的问题,很大的概率上会造成变量、函数名的冲突污染</li>
+<li>文件依赖: &nbsp;&nbsp;在多个js文件引用的问题上,b.js可能需要依赖a.js的文件中的变量以及函数等,所以在加载上会有一个先后顺序的问题,在实际的开发中,文件比较且比较繁杂,很容易出问题.</li>
+</ul>
+</li>
+</ul>
+<p>根据以上的两个存在的问题,一句模块发开发的概念可以较完美的解决上述的两个问题.</p>
+<ul>
+<li><p>模版规范</p>
+<ul>
+<li>浏览器端模块化<ul>
+<li>AMD — Require.js</li>
+<li>CMD — Sea.js</li>
+</ul>
+</li>
+<li>服务端的模块化<ul>
+<li>CommonJS — Node.js<h3 id="Require-js的基本使用"><a href="#Require-js的基本使用" class="headerlink" title="Require.js的基本使用"></a>Require.js的基本使用</h3><h4 id="为什么要用Require-js"><a href="#为什么要用Require-js" class="headerlink" title="为什么要用Require.js?"></a>为什么要用Require.js?</h4>最早的时候，所有Javascript代码都写在一个文件里面，只要加载这一个文件就够了。后来，代码越来越多，一个文件不够了，必须分成多个文件，依次加载。首先在加载的时候,浏览器会停止对网页的渲染,加载文件越多,网页失去响应的时间越长,极大的影响的用户的体验;其次,由于js文件之间存在着依赖的关系,因此必须要保证正确的加载顺序,依赖性最大的文件一定要放到最后面进行加载,当依赖的关系很复杂的时候,代码的编写和维护都会变成非常的困难.</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>所以Require.js就是为了解决这两个问题.</li>
+</ul>
+<ol>
+<li>实现js文件的异步加载,避免网页失去响应;</li>
+<li>管理模块之间的依赖性,便于代码的编写和维护.</li>
+</ol>
+<p>RequireJS是一个非常小巧的JavaScript模块载入框架,是AMD规范最好的实现者之一.</p>
+</li>
+</ul>
+<h4 id="Require-js的加载"><a href="#Require-js的加载" class="headerlink" title="Require.js的加载"></a>Require.js的加载</h4><ol>
+<li>使用require.js的第一步,是先去官网下载最新的版本</li>
+<li>下载后,假设把它放在js子目录下面,就可以加载了.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&apos;js/require.js&apos;&gt;&lt;script&gt;</div></pre></td></tr></table></figure>
+<p>如果担心在加载这个文件的时候也可能造成网页失去响应,有2个解决的方法,一个就是把放到网页的底部加载,另一个写成下面这样:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&apos;js/require.js&apos; defer async=&apos;true&apos;&gt;&lt;script&gt;</div></pre></td></tr></table></figure></p>
+<p>async这个属性表明这个文件需要异步进行加载,避免网页失去响应.IE不支持这个属性,只支持defer,所以把defer也写上.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&apos;js/require.js&apos; data-main=&apos;js/main&apos;&gt;&lt;script&gt;</div></pre></td></tr></table></figure></p>
+<p>其中data-main是一个自定义属性,作用是指定网页程序的主模块,在上面的例子中,指的就是main.js，这个文件会第一个被require.js加载.由于require.js默认的文件后缀名是js,所以可以把main.js简写成main</p>
+<h4 id="主模块的写法"><a href="#主模块的写法" class="headerlink" title="主模块的写法"></a>主模块的写法</h4><p>上面的main.js我们可以称之为主模块,就是整个网页的入口代码,所有的代码都是从这里开始运行.</p>
+<p>如果我们的代码不依赖与其他的代码,就直接写JavaScript,这样的话就没必要用require.js了.真实的情况就是,主模块依赖于其他模块,这时就是要使用AMD规范定义的require()这个方法(API)<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'moduleA'</span>,<span class="string">'moduleB'</span>,<span class="string">'modulec'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">moduleA,moduleB,modulec</span>)</span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// some code here</span></div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>require()接受两个参数,第一个参数是一个数组,表示的是所依赖的模块,上面就是[‘moduleA’,’moduleB’,’modulec’],即主模块依赖这三个模块;第二个参数是一个回调函数,当前面指定的模块都加载成功后,这个回调函数就是被调用,加载的模块会以参数形式传入该函数,<br>从而在回调函数内部就可以使用这个模块.</p>
+<p>require()异步加载moduleA,module和moduleC,浏览器不会失去响应;它指定的回调函数,只有前面的模块加载完成之后才会执行,这样就解决了模块依赖的问题.<br>假设主模块依赖jQuery,md1,和md2这三个模块,main.js中就这样写<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'jQuery'</span>,<span class="string">'md1'</span>,<span class="string">'md2'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">$,md1,md2</span>) </span>&#123;</div><div class="line"></div><div class="line">	<span class="comment">// some code here</span></div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>require.js会先加载jQuery,md1,和md2这三个模块,然后在执行回调函数,主模块的代码就写在回调函数当中.</p>
+<h4 id="模块的加载"><a href="#模块的加载" class="headerlink" title="模块的加载"></a>模块的加载</h4><p>上面的示例中,主模块依赖的是([‘jQuery’,’md1’,’md2’].默认的情况下,require.js假定这三个模块与main.js在同一个目录下,文件名为jQuery.js,md1.js和md2.js,然后自动加载.</p>
+<p>使用require.config()方法,可以对模块的加载行为进行自定义,require.config()就写在主模块(main.js)的头部,参数就是一个对象<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.config(&#123;</div><div class="line">	baseUrl:<span class="string">'./js'</span>  <span class="comment">//设置模块文件的基目录,也就是参考路径</span></div><div class="line">	paths:&#123; <span class="comment">//指定各个模块的加载路径   也就是给模块文件起一个别名,方便在添加依赖的时候使用</span></div><div class="line">		m1:<span class="string">'m1'</span>,</div><div class="line">		md1:<span class="string">'../module1'</span>,</div><div class="line">		md2:<span class="string">'../module2'</span>,</div><div class="line">		md3:<span class="string">'../module3'</span>,</div><div class="line">		jquery:<span class="string">'../jquery'</span></div><div class="line">	&#125;,</div><div class="line">	shim:&#123; <span class="comment">//垫片 专门用来把非AMD标准的模块变成标准的模块</span></div><div class="line">		m1:&#123;</div><div class="line">			deps:[<span class="string">'jquery'</span>], <span class="comment">//deps数组,表明该模块的依赖性</span></div><div class="line">			exports:<span class="string">'foo'</span> <span class="comment">//exports值（输出的变量名），表明这个模块外部调用时的名称</span></div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>上面的例子中,m1.js这个模块位于基目录下,也就是参考路径下. 而md1.js, md2.js和md3.js是和基目录位于同一个目录下,所以要向上查找一级../,m1.js不是一个标准模块,需要用shim变成标准模块,而且它依赖于jquery</p>
+<p>require.js要求,每个模块是一个单独的js文件,这样的话,如果加载多个模块就会发出多次HTTP请求,从而影响网页的加载速度.因此,require.js提供了一个<a href="http://requirejs.org/docs/optimization.html" target="_blank" rel="external">优化工具</a>.当模块部署完毕之后,可以用这个工具将多个模块合并在一个文件中,减少HTTP的请求次数.</p>
+<h4 id="AMD模块的写法"><a href="#AMD模块的写法" class="headerlink" title="AMD模块的写法"></a>AMD模块的写法</h4><p>require.js加载的模块,采用AMD规范,也就是说必须按照AMD的规定来写.<br>具体来说,就是模块必须采用特定的difine()来定义,如果一个模块不依赖其他模块,那么可以直接定义在difine()之中. 加入现在有一个module1文件,它定义了一个模块,那么math.js要这样写:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// math.js</span></div><div class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params">x,y</span>) </span>&#123;</div><div class="line">		<span class="keyword">return</span> x + y;</div><div class="line">	&#125;;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		add: add;</div><div class="line">	&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>加载的方法如下<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// main.js</span></div><div class="line"><span class="built_in">require</span>([<span class="string">'math'</span>],func(math) &#123;</div><div class="line">	alert(math.add(<span class="number">1</span> + <span class="number">2</span>));</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>如果这么模块还依赖于其他模块,那么define()函数的第一个参数必须是一个数组,指明该模块的依赖性.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">difine([<span class="string">'mylib'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">mylib</span>)</span>&#123;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		mylib.dosomething();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		foo: foo;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>理论上,requi.js的加载必须要依照AMD的规范、用define()函数定义的模块,实际上,虽然有一些流行框架(比如jQuery)符合AMD的规范,那么大部分库并不符合,那么就要用require.config()来定义它们的一些特征.比如jQuery的一些插件<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.config(</div><div class="line">	shim: &#123;</div><div class="line">		<span class="string">'jquery.scroll'</span>:&#123;</div><div class="line">			deps: [<span class="string">'jquery'</span>],</div><div class="line">			exports:<span class="string">'jQuery.fn.scroll'</span></div><div class="line">		&#125;<span class="number">1</span></div><div class="line">	&#125;</div><div class="line">)</div></pre></td></tr></table></figure></p>
+<p>此外,require.js还提供一些其他的插件,来实现一些特定的功能.<a href="http://requirejs.org/docs/optimization.html" target="_blank" rel="external">文档地址</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.jpg" alt="LiveRay 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/30/git2/" rel="next" title="命令行以及git初识2">
+                <i class="fa fa-chevron-left"></i> 命令行以及git初识2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/13/yiha/" rel="prev" title="yiha">
+                yiha <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/uploads/tx.jpg"
+              alt="LiveRay" />
+          
+            <p class="site-author-name" itemprop="name">LiveRay</p>
+            <p class="site-description motion-element" itemprop="description">Write Less, Do More</p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/dabpfeng" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/dabpfeng" target="_blank" title="新浪微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>新浪微博</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块化开发的概念"><span class="nav-number">1.</span> <span class="nav-text">模块化开发的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Require-js的基本使用"><span class="nav-number">1.1.</span> <span class="nav-text">Require.js的基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要用Require-js"><span class="nav-number">1.1.1.</span> <span class="nav-text">为什么要用Require.js?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Require-js的加载"><span class="nav-number">1.1.2.</span> <span class="nav-text">Require.js的加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主模块的写法"><span class="nav-number">1.1.3.</span> <span class="nav-text">主模块的写法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块的加载"><span class="nav-number">1.1.4.</span> <span class="nav-text">模块的加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AMD模块的写法"><span class="nav-number">1.1.5.</span> <span class="nav-text">AMD模块的写法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 &mdash; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiveRay</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.2</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
